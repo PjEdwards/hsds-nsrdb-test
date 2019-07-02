@@ -1,0 +1,25 @@
+{
+  "name": "hsds-nsrdb-test",
+  "version": "0.0.1",
+  "description": "Concurrent async threaded download of HSDS datasets into single CSV",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "axios": "^0.19.0",
+    "csv-stringify": "^5.3.0",
+    "express": "^4.16.3",
+    "express-validator": "^5.3.0",
+    "loadtest": "^3.0.7",
+    "moment": "^2.22.2",
+    "nodemon": "^1.18.4",
+    "request": "^2.88.0",
+    "retry-request": "^4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon --watch server.js --watch app --ignore app/nsrdbmeta.json --inspect"
+  },
+  "author": "Paul Edwards",
+  "license": "ISC"
+}
