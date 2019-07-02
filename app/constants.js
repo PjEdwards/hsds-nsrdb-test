@@ -26,8 +26,7 @@ const DATASETS = [
 ]
   
 const HSDS_URI = "http://hsds.nsrdb.test",
-      HSDS_DOMAIN = '/nrel/nsrdb',
-      API_KEY = "RdVcT7CPvweOaArlliw8czhGY6htiPjL8vLFW2Gc";
+      HSDS_DOMAIN = '/nrel/nsrdb';
 
 module.exports = {
   YEARS,
@@ -35,6 +34,5 @@ module.exports = {
   LAST_YEAR: YEARS[YEARS.length-1],
   DATASETS,
   HSDS_DOMAIN,
-  HSDS_URI,
-  API_KEY
+  HSDS_URI
 }
