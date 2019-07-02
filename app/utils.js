@@ -216,6 +216,7 @@ const _initNSRDBMeta = async function () {
       _initNSRDBMetaFromHSDS();
     } else {
       NSRDB_META = require('./nsrdbmeta.json');
+      console.log(`NSRDB meta fetch complete from file`);
     }
   } catch(err) {
     _initNSRDBMetaFromHSDS();
