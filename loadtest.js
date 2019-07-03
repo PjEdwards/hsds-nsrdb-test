@@ -4,7 +4,8 @@ const loadtest = require('loadtest'),
 
 // SPECIFY LOADTEST SCALE WITH THESE
 const TOTAL_REQUESTS = 50;
-const CONCURRENT_CLIENTS = 8;
+const CONCURRENT_CLIENTS = 4;
+//let REPEAT_RATE = 3;
 
 function statusCallback(error, result, latency) {
   //console.log('Current latency %j, result N/A, error %j', latency, error);
@@ -15,10 +16,11 @@ function statusCallback(error, result, latency) {
       console.log(`Error: ${error}`);
     }
   } else {
-    console.log('----');
-    console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
-    if(error) {
-      console.log(`Error: ${error}`);
+    if (error) {
+      console.log(`Request ${result.requestIndex} error: ${error}`);
+    }    
+    if(result.requestIndex % 10 === 0) {
+      console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
     }
   }  
 }
@@ -58,9 +60,11 @@ const options = {
   statusCallback: statusCallback
 };
 
-loadtest.loadTest(options, function (error) {
+function cb(error) {
   if (error) {
     return console.error('Got an error: %s', error);
   }
   console.log('Tests run successfully');
-});
+}
+
+loadtest.loadTest(options, cb);
