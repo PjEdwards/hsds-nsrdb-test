@@ -47,4 +47,3 @@ For more info, see https://github.com/alexfernandez/loadtest
 - each request for 4 attributes
 - response time for each < 30 seconds
 - request years and attributes randomized across full range
-

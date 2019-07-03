@@ -7,10 +7,16 @@ const express = require('express'),
       constants = require('./constants.js'),
       { check, validationResult } = require('express-validator/check');
 
-const hsdsUri = constants.HSDS_URI;
-      hsdsDomain = constants.HSDS_DOMAIN,
-      apiKey = constants.API_KEY,
+const hsdsDomain = constants.HSDS_DOMAIN,
       router = express.Router();
+
+let lastUriId = 0;
+function getHsdsUri() {
+  let nextId = lastUriId === 0 ? 1 : 0;
+  let uri = constants.HSDS_URIS[nextId];
+  lastUriId = nextId;
+  return uri;
+}
 
 // Timezones ahead of UTC (+) need the end of the array
 // rolled onto the front of the array. Timezones behind
@@ -78,7 +84,7 @@ async function(req, res, next){
     requests = {}
     datasets.forEach(ds => {
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
-          requestUri = `${hsdsUri}/datasets/${dsId}/value`,
+          requestUri = `${getHsdsUri()}/datasets/${dsId}/value`,
           params = {
             host: `${hsdsDomain}/nsrdb_${year}.h5`,
             select: selectParm
@@ -116,7 +122,7 @@ async function(req, res, next){
     // Send all the requests in parallel
     async.parallel(requests, function (err, results) {
       const runTime = moment().diff(startTime, 'ms');
-      console.log("All requests (or an error) returned after", runTime/1000, "seconds");
+      //console.log("All requests (or an error) returned after", runTime/1000, "seconds");
       if (!err) {
         datasets = datasets.filter(ds => ds !== 'time_index');
         let timeIndex = results['time_index'],
@@ -158,7 +164,7 @@ async function(req, res, next){
         res.status(200).send(csv(data));
       } else {
         let messages = [],
-            statusCode = 200;
+            statusCode = 500;
         Object.keys(results).forEach(k => {
           if (results[k].msg) {
             messages.push(results[k].msg);

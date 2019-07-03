@@ -22,7 +22,7 @@ const DATASETS = [
   'wind_speed'
 ]
   
-const HSDS_URI = "http://hsds.nsrdb.test",
+const HSDS_URIS = ["http://hsds.nsrdb.test", "http://hsds.nsrdb.test2"],
       HSDS_DOMAIN = '/nrel/nsrdb';
 
 module.exports = {
@@ -31,5 +31,6 @@ module.exports = {
   LAST_YEAR: YEARS[YEARS.length-1],
   DATASETS,
   HSDS_DOMAIN,
-  HSDS_URI
+  HSDS_URI: HSDS_URIS[0],
+  HSDS_URIS
 }
