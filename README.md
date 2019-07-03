@@ -43,3 +43,11 @@ Start the service as above, then
 _*_ *Keep in mind that the number of attributes requested in the URL will equal the number of parallel requests sent to HSDS for each single request sent by loadtest*
 
 For more info, see https://github.com/alexfernandez/loadtest
+
+## NSRDB Target
+- 6 requests per second
+- sustained for 24 hours
+- each request for 4 attributes
+- response time for each < 30 seconds
+- request years and attributes randomized across full range
+
