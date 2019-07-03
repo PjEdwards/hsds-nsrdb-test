@@ -161,7 +161,7 @@ async function(req, res, next){
         const runTime = moment().diff(startTime, 'ms');
         console.log("All post processing complete after", runTime / 1000, "seconds");
         res.attachment("nsrdb-data-file.csv");
-        res.status(200).send(csv(data));
+        res.status(200).send(csv(data.slice(0,5)));
       } else {
         let messages = [],
             statusCode = 500;
