@@ -2,6 +2,10 @@ const loadtest = require('loadtest'),
       constants = require('./app/constants'),
       querystring = require('querystring');
 
+// SPECIFY LOADTEST SCALE WITH THESE
+const TOTAL_REQUESTS = 100;
+const CONCURRENT_CLIENTS = 10;
+
 function statusCallback(error, result, latency) {
   console.log('Current latency %j, result N/A, error %j', latency, error);
   console.log('----');
@@ -38,9 +42,9 @@ function requestRandomizer(params, options, client, callback) {
 
 const options = {
   url: 'http://localhost:9000/',
-  maxRequests: 600,
+  maxRequests: TOTAL_REQUESTS,
+  concurrency: CONCURRENT_CLIENTS,
   timeout: 0,
-  concurrency: 30,
   requestGenerator: requestRandomizer,
   statusCallback: statusCallback
 };

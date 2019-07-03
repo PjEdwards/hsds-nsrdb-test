@@ -32,13 +32,10 @@ If this initialization fails then the most likely culprit is the connection to t
 ## To Loadtest
 Start the service as above, then
 ```bash
-./node_modules/.bin/loadtest -n 200 -c 30 --timeout 0 -k "http://localhost:9000/?year=2004&siteId=262343&attributes=dni,ghi,solar_zenith_angle&tzOffset=0&interval=60"
+yarn ltest
 ```
 
-- `-n` is the number of total requests that will be sent
-- `-c` is the number of requests that will be sent at a time
-- `--timeout` sets the request timeout, a value of 0 disables timeout
-- `--k` the url to hit *
+To customize the test, edit the parameters in the [loadtest script](./loadtest.js)
 
 _*_ *Keep in mind that the number of attributes requested in the URL will equal the number of parallel requests sent to HSDS for each single request sent by loadtest*
 
