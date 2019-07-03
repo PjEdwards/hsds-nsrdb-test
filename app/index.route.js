@@ -68,11 +68,11 @@ async function(req, res, next){
     datasetMeta = await utils.getNSRDBMetaData();
     datasetMeta = datasetMeta[year];
 
-    console.log(`Starting new job at ${startTime} with ${selectParm}`);
-
     if(!datasets.includes('time_index')) {
       datasets.splice(0, 0, 'time_index');
     }
+
+    console.log(`Starting new job at ${startTime} with ${selectParm}, ${year}, ${datasets}`);
 
     // Collect the datasets as parallel requests
     requests = {}
