@@ -3,15 +3,24 @@ const loadtest = require('loadtest'),
       querystring = require('querystring');
 
 // SPECIFY LOADTEST SCALE WITH THESE
-const TOTAL_REQUESTS = 500;
-const CONCURRENT_CLIENTS = 5;
+const TOTAL_REQUESTS = 50;
+const CONCURRENT_CLIENTS = 8;
 
 function statusCallback(error, result, latency) {
   //console.log('Current latency %j, result N/A, error %j', latency, error);
-  console.log('----');
-  console.log('Request elapsed milliseconds: ', result.requestElapsed);
-  console.log('Request index: ', result.requestIndex);
-  console.log(latency);
+  if(latency.totalRequests === TOTAL_REQUESTS) {
+    console.log("--------");
+    console.log(latency);
+    if (error) {
+      console.log(`Error: ${error}`);
+    }
+  } else {
+    console.log('----');
+    console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
+    if(error) {
+      console.log(`Error: ${error}`);
+    }
+  }  
 }
 
 function requestRandomizer(params, options, client, callback) {
@@ -44,7 +53,7 @@ const options = {
   url: 'http://localhost:9000/',
   maxRequests: TOTAL_REQUESTS,
   concurrency: CONCURRENT_CLIENTS,
-  timeout: 0,
+  timeout: 60000,
   requestGenerator: requestRandomizer,
   statusCallback: statusCallback
 };
