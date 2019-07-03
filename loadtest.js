@@ -3,15 +3,15 @@ const loadtest = require('loadtest'),
       querystring = require('querystring');
 
 // SPECIFY LOADTEST SCALE WITH THESE
-const TOTAL_REQUESTS = 100;
-const CONCURRENT_CLIENTS = 10;
+const TOTAL_REQUESTS = 500;
+const CONCURRENT_CLIENTS = 5;
 
 function statusCallback(error, result, latency) {
-  console.log('Current latency %j, result N/A, error %j', latency, error);
+  //console.log('Current latency %j, result N/A, error %j', latency, error);
   console.log('----');
   console.log('Request elapsed milliseconds: ', result.requestElapsed);
   console.log('Request index: ', result.requestIndex);
-  console.log('Request loadtest() instance index: ', result.instanceIndex);
+  console.log(latency);
 }
 
 function requestRandomizer(params, options, client, callback) {
