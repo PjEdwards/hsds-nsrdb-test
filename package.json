@@ -12,13 +12,15 @@
     "loadtest": "^3.0.7",
     "moment": "^2.22.2",
     "nodemon": "^1.18.4",
+    "querystring": "^0.2.0",
     "request": "^2.88.0",
     "retry-request": "^4.1.1"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node server.js",
-    "dev": "NODE_ENV=development nodemon --watch server.js --watch app --ignore app/nsrdbmeta.json --inspect"
+    "dev": "NODE_ENV=development nodemon --watch server.js --watch app --ignore app/nsrdbmeta.json --inspect",
+    "ltest": "node loadtest.js"
   },
   "author": "Paul Edwards",
   "license": "ISC"
