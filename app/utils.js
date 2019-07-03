@@ -130,10 +130,7 @@ const _initNSRDBMetaFromHSDS = async function() {
   NSRDB_META = {};
   let startTime = moment(),
       axiosInstance = axios.create({
-        baseURL: constants.HSDS_URI,
-        headers: {
-          'X-Api-Key': constants.API_KEY
-        }
+        baseURL: constants.HSDS_URI
       }),
       years = constants.YEARS,
       requests = {};

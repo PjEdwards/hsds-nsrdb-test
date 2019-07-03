@@ -83,13 +83,9 @@ async function(req, res, next){
             host: `${hsdsDomain}/nsrdb_${year}.h5`,
             select: selectParm
           },
-          headers = {
-            "X-Api-Key": apiKey
-          },
           options = {
             uri: requestUri,
             method: "GET",
-            headers: headers,
             qs: params,
           },
           retryOpts = {
