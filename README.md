@@ -10,7 +10,9 @@ yarn
 ```
 
 ### HSDS requirement
-This service requires a running instance of HSDS configured with the S3 bucket containing the NSRDB Data
+This service requires a running instance of HSDS.  BUCKET_NAME can be set as below, or you can create a bucket as described in the HSDS installation instructions.
+
+For best performance it's desirable that the service run in the AWS uus-west-2 reegion.
 ```
 BUCKET_NAME=nrel-pds-hsds
 AWS_REGION=us-west-2
@@ -47,4 +49,3 @@ For more info, see https://github.com/alexfernandez/loadtest
 - each request for 4 attributes
 - response time for each < 30 seconds
 - request years and attributes randomized across full range
-

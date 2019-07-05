@@ -9,6 +9,7 @@ const express = require('express'),
 
 const hsdsUri = constants.HSDS_URI;
       hsdsDomain = constants.HSDS_DOMAIN,
+      bucket = constants.BUCKET_NAME,
       apiKey = constants.API_KEY,
       router = express.Router();
 
@@ -80,8 +81,9 @@ async function(req, res, next){
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
           requestUri = `${hsdsUri}/datasets/${dsId}/value`,
           params = {
-            host: `${hsdsDomain}/nsrdb_${year}.h5`,
-            select: selectParm
+            domain: `${hsdsDomain}/nsrdb_${year}.h5`,
+            select: selectParm,
+            bucket: `${bucket}`
           },
           options = {
             uri: requestUri,
