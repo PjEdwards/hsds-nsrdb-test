@@ -22,8 +22,7 @@ const DATASETS = [
   'wind_speed'
 ]
   
-// const HSDS_URI = "http://hsds.nsrdb.test",
-const HSDS_URI = "http://hsds.hdf.test",
+const HSDS_URI = "http://hsds.nsrdb.test",
       HSDS_DOMAIN = '/nrel/nsrdb';
 
 const BUCKET_NAME = 'nrel-pds-hsds';
