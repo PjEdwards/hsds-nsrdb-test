@@ -9,15 +9,14 @@ const CONCURRENT_CLIENTS = 5;
 function statusCallback(error, result, latency) {
   //console.log('Current latency %j, result N/A, error %j', latency, error);
   console.log('----');
-  console.log("error: ", error)
-  console.log('Request elapsed milliseconds: ', result);
-
+  
   if (result) {
     console.log('Request elapsed milliseconds: ', result.requestElapsed);
     console.log('Request index: ', result.requestIndex);
-    } else {
-      console.log("no result");
-    }
+  } else {
+    console.log("no result");
+  }
+  console.log("error: ", error)
   console.log(latency);
 }
 
