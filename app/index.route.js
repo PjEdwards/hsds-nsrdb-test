@@ -13,6 +13,14 @@ const hsdsUri = constants.HSDS_URI;
       apiKey = constants.API_KEY,
       router = express.Router();
 
+let lastUriId = 0;
+function getHsdsUri() {
+  let nextId = lastUriId === 0 ? 1 : 0;
+  let uri = constants.HSDS_URIS[nextId];
+  lastUriId = nextId;
+  return uri;
+}
+
 // Timezones ahead of UTC (+) need the end of the array
 // rolled onto the front of the array. Timezones behind
 // UTC (-) need the front of the array rolled onto the end
@@ -79,7 +87,7 @@ async function(req, res, next){
     requests = {}
     datasets.forEach(ds => {
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
-          requestUri = `${hsdsUri}/datasets/${dsId}/value`,
+          requestUri = `${getHsdsUri()}/datasets/${dsId}/value`,
           params = {
             domain: `${hsdsDomain}/nsrdb_${year}.h5`,
             select: selectParm,
@@ -118,7 +126,7 @@ async function(req, res, next){
     // Send all the requests in parallel
     async.parallel(requests, function (err, results) {
       const runTime = moment().diff(startTime, 'ms');
-      console.log("All requests (or an error) returned after", runTime/1000, "seconds");
+      //console.log("All requests (or an error) returned after", runTime/1000, "seconds");
       if (!err) {
         datasets = datasets.filter(ds => ds !== 'time_index');
         let timeIndex = results['time_index'],
@@ -157,10 +165,10 @@ async function(req, res, next){
         const runTime = moment().diff(startTime, 'ms');
         console.log("All post processing complete after", runTime / 1000, "seconds");
         res.attachment("nsrdb-data-file.csv");
-        res.status(200).send(csv(data));
+        res.status(200).send(csv(data.slice(0,5)));
       } else {
         let messages = [],
-            statusCode = 200;
+            statusCode = 500;
         Object.keys(results).forEach(k => {
           if (results[k].msg) {
             messages.push(results[k].msg);

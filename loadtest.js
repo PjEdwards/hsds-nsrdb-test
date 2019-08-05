@@ -3,21 +3,28 @@ const loadtest = require('loadtest'),
       querystring = require('querystring');
 
 // SPECIFY LOADTEST SCALE WITH THESE
-const TOTAL_REQUESTS = 500;
-const CONCURRENT_CLIENTS = 5;
+const TOTAL_REQUESTS = 50;
+const CONCURRENT_CLIENTS = 4;
+//let REPEAT_RATE = 3;
 
 function statusCallback(error, result, latency) {
   //console.log('Current latency %j, result N/A, error %j', latency, error);
-  console.log('----');
-  
-  if (result) {
-    console.log('Request elapsed milliseconds: ', result.requestElapsed);
-    console.log('Request index: ', result.requestIndex);
+  if(latency.totalRequests === TOTAL_REQUESTS) {
+    console.log("--------");
+    console.log(latency);
+    if (error) {
+      console.log(`Error: ${error}`);
+    }
   } else {
-    console.log("no result");
-  }
-  console.log("error: ", error)
-  console.log(latency);
+    if(result) {
+      if(error) {
+        console.log(`Request ${result.requestIndex} error: ${error}`);
+      }    
+      if(result.requestIndex % 10 === 0) {
+        console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
+      }
+    }
+  }  
 }
 
 function requestRandomizer(params, options, client, callback) {
@@ -55,9 +62,11 @@ const options = {
   statusCallback: statusCallback
 };
 
-loadtest.loadTest(options, function (error) {
+function cb(error) {
   if (error) {
     return console.error('Got an error: %s', error);
   }
   console.log('Tests run successfully');
-});
+}
+
+loadtest.loadTest(options, cb);
