@@ -9,8 +9,14 @@ const CONCURRENT_CLIENTS = 5;
 function statusCallback(error, result, latency) {
   //console.log('Current latency %j, result N/A, error %j', latency, error);
   console.log('----');
-  console.log('Request elapsed milliseconds: ', result.requestElapsed);
-  console.log('Request index: ', result.requestIndex);
+  
+  if (result) {
+    console.log('Request elapsed milliseconds: ', result.requestElapsed);
+    console.log('Request index: ', result.requestIndex);
+  } else {
+    console.log("no result");
+  }
+  console.log("error: ", error)
   console.log(latency);
 }
 
@@ -44,7 +50,7 @@ const options = {
   url: 'http://localhost:9000/',
   maxRequests: TOTAL_REQUESTS,
   concurrency: CONCURRENT_CLIENTS,
-  timeout: 0,
+  timeout: 300000,
   requestGenerator: requestRandomizer,
   statusCallback: statusCallback
 };
