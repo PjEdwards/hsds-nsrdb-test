@@ -25,6 +25,8 @@ const DATASETS = [
 const HSDS_URIS = ["http://hsds.nsrdb.test", "http://hsds.nsrdb.test2"],
       HSDS_DOMAIN = '/nrel/nsrdb';
 
+const BUCKET_NAME = 'nrel-pds-hsds';
+
 module.exports = {
   YEARS,
   FIRST_YEAR: YEARS[0],
@@ -32,5 +34,6 @@ module.exports = {
   DATASETS,
   HSDS_DOMAIN,
   HSDS_URI: HSDS_URIS[0],
-  HSDS_URIS
+  HSDS_URIS,
+  BUCKET_NAME
 }

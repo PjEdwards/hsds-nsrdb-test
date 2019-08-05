@@ -16,11 +16,13 @@ function statusCallback(error, result, latency) {
       console.log(`Error: ${error}`);
     }
   } else {
-    if (error) {
-      console.log(`Request ${result.requestIndex} error: ${error}`);
-    }    
-    if(result.requestIndex % 10 === 0) {
-      console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
+    if(result) {
+      if(error) {
+        console.log(`Request ${result.requestIndex} error: ${error}`);
+      }    
+      if(result.requestIndex % 10 === 0) {
+        console.log(`Request ${result.requestIndex} elapsed milliseconds: ${result.requestElapsed}`);
+      }
     }
   }  
 }
@@ -55,7 +57,7 @@ const options = {
   url: 'http://localhost:9000/',
   maxRequests: TOTAL_REQUESTS,
   concurrency: CONCURRENT_CLIENTS,
-  timeout: 60000,
+  timeout: 300000,
   requestGenerator: requestRandomizer,
   statusCallback: statusCallback
 };

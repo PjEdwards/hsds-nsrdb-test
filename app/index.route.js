@@ -7,7 +7,10 @@ const express = require('express'),
       constants = require('./constants.js'),
       { check, validationResult } = require('express-validator/check');
 
-const hsdsDomain = constants.HSDS_DOMAIN,
+const hsdsUri = constants.HSDS_URI;
+      hsdsDomain = constants.HSDS_DOMAIN,
+      bucket = constants.BUCKET_NAME,
+      apiKey = constants.API_KEY,
       router = express.Router();
 
 let lastUriId = 0;
@@ -86,8 +89,9 @@ async function(req, res, next){
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
           requestUri = `${getHsdsUri()}/datasets/${dsId}/value`,
           params = {
-            host: `${hsdsDomain}/nsrdb_${year}.h5`,
-            select: selectParm
+            domain: `${hsdsDomain}/nsrdb_${year}.h5`,
+            select: selectParm,
+            bucket: `${bucket}`
           },
           options = {
             uri: requestUri,
