@@ -4,7 +4,7 @@ const YEARS = [
   2016, 2017
 ]
 
-const FILE_NAME_APPEND = '-1w';
+const FILE_NAME_APPEND = '-1y';
 
 // All the downloadable datasets in HSDS
 const DATASETS = [

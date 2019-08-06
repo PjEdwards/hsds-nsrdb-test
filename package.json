@@ -20,7 +20,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "NODE_ENV=development nodemon --watch server.js --watch app --ignore app/nsrdbmeta.json --inspect",
-    "ltest": "node loadtest.js"
+    "ltest": "node loadtest.js",
+    "jmeter": "bash -c 'mkdir ./jmeter-reports/${0} && jmeter -n -t jmeter-test.jmx -l ./jmeter-reports/${0}/log.txt -e -o ./jmeter-reports/${0}/report'"
   },
   "author": "Paul Edwards",
   "license": "ISC"

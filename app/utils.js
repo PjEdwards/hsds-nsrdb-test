@@ -33,6 +33,7 @@ const _initNSRDBMetaForAttr = function(year, dataset, attr, axiosInstance) {
 }
 
 const _initNSRDBMetaForDataset = function (year, dataset, axiosInstance) {
+
   const req = function (callback) {
     let axiosOpts = {
       params: {
@@ -154,7 +155,9 @@ const _initNSRDBMetaFromHSDS = async function() {
         // Fourth get a list of available attributes for each dataset
         requests = [];
         results[years[0]].datasets.forEach(dataset => {
-          requests.push(_initNSRDBMetaForDataset(years[0], dataset, axiosInstance));
+          if(dataset.name !== 'stats') {
+            requests.push(_initNSRDBMetaForDataset(years[0], dataset, axiosInstance));
+          }
         });
 
         parallelLimit(requests, 10, (error, results) => {
