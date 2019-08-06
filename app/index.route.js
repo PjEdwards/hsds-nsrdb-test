@@ -7,7 +7,7 @@ const express = require('express'),
       constants = require('./constants.js'),
       { check, validationResult } = require('express-validator/check');
 
-const hsdsUri = constants.HSDS_URI;
+const hsdsUriCount = constants.HSDS_URIS.length,
       hsdsDomain = constants.HSDS_DOMAIN,
       bucket = constants.BUCKET_NAME,
       apiKey = constants.API_KEY,
@@ -15,7 +15,7 @@ const hsdsUri = constants.HSDS_URI;
 
 let lastUriId = 0;
 function getHsdsUri() {
-  let nextId = lastUriId === 0 ? 1 : 0;
+  let nextId = lastUriId+1 === hsdsUriCount ? 0 : lastUriId+1;
   let uri = constants.HSDS_URIS[nextId];
   lastUriId = nextId;
   return uri;
