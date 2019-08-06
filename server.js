@@ -6,7 +6,7 @@ const express = require('express'),
 utils.getNSRDBMetaData();
 
 const app = express(),
-      serverPort = 9000;
+      serverPort = process.env.PORT || 9000;
 
 app.use(express.json());
 
