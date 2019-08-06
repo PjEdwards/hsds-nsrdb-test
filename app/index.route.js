@@ -89,7 +89,7 @@ async function(req, res, next){
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
           requestUri = `${getHsdsUri()}/datasets/${dsId}/value`,
           params = {
-            domain: `${hsdsDomain}/nsrdb_${year}.h5`,
+            domain: `${hsdsDomain}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
             select: selectParm,
             bucket: `${bucket}`
           },

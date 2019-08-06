@@ -12,7 +12,7 @@ const _initNSRDBMetaForAttr = function(year, dataset, attr, axiosInstance) {
     // Fifth get the value of each available attribute
     let axiosOpts = {
       params: {
-        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}.h5`,
+        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
         bucket: `${constants.BUCKET_NAME}`
       },
       url: `/datasets/${dataset.id}/attributes/${attr.name}`
@@ -36,7 +36,7 @@ const _initNSRDBMetaForDataset = function (year, dataset, axiosInstance) {
   const req = function (callback) {
     let axiosOpts = {
       params: {
-        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}.h5`,
+        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
         bucket: `${constants.BUCKET_NAME}`
       },
       url: `/datasets/${dataset.id}/attributes`
@@ -64,7 +64,7 @@ const _initNSRDBMetaForYear = function(year, axiosInstance) {
     let meta = {},
         axiosOpts = {
           params: {
-            domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}.h5`,
+            domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
             bucket: `${constants.BUCKET_NAME}`
           }
         };
@@ -77,10 +77,10 @@ const _initNSRDBMetaForYear = function(year, axiosInstance) {
           let groupId = resp.data.root;
 
           // Second get the version attribute of this NSRDB file
-          axiosOpts.url = `/groups/${groupId}/attributes/version`;
-          axiosInstance.request(axiosOpts)
-            .then(resp => {
-              meta.version = resp.data.value;
+          //axiosOpts.url = `/groups/${groupId}/attributes/version`;
+          //axiosInstance.request(axiosOpts)
+            //.then(resp => {
+              //meta.version = resp.data.value;
 
               // Third get the list of available datasets
               axiosOpts.url = `/groups/${groupId}/links`;
@@ -103,13 +103,13 @@ const _initNSRDBMetaForYear = function(year, axiosInstance) {
                     error: err
                   });
                 })
-            })
-            .catch(err => {
-              callback(true, {
-                msg: `Failed to load NSRDB meta for ${year} with ${err}`,
-                error: err
-              });
-            })
+            //})
+            //.catch(err => {
+            //  callback(true, {
+            //     msg: `Failed to load NSRDB meta for ${year} with ${err}`,
+            //     error: err
+            //   });
+            // })
         })
         .catch(err => {
           callback(true, {
@@ -199,12 +199,12 @@ const _initNSRDBMetaFromHSDS = async function() {
           }
         });
       } else {
-        console.log(error);
-        console.log(results);
+        console.log(JSON.stringify(error, null, 2));
+        console.log(JSON.stringify(results, null, 2));
       }
     })
   } catch(error) {
-    console.log(error);
+    console.log(JSON.stringify(error, null, 2));
   }
 }
 

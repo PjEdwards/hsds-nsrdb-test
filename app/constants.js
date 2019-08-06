@@ -1,5 +1,10 @@
 // All the years for which there exists data in HSDS
-const YEARS = Array.from({length: 20}, (x,i) => i+1998 );
+// const YEARS = Array.from({length: 20}, (x,i) => i+1998 );
+const YEARS = [
+  2016, 2017
+]
+
+const FILE_NAME_APPEND = '-1w';
 
 // All the downloadable datasets in HSDS
 const DATASETS = [
@@ -40,5 +45,6 @@ module.exports = {
   HSDS_DOMAIN,
   HSDS_URI: HSDS_URIS[0],
   HSDS_URIS,
-  BUCKET_NAME
+  BUCKET_NAME,
+  FILE_NAME_APPEND
 }
