@@ -4,7 +4,7 @@ const YEARS = [
   2016, 2017
 ]
 
-const FILE_NAME_APPEND = '-1y';
+const FILE_NAME_APPEND = '-8w';
 
 // All the downloadable datasets in HSDS
 const DATASETS = [
@@ -28,10 +28,10 @@ const DATASETS = [
 ]
   
 const HSDS_URIS = [
-        "http://hsds.nsrdb.test", 
-        "http://hsds.nsrdb.testtwo", 
-        "http://hsds.nsrdb.testthree", 
-        "http://hsds.nsrdb.testfour"
+        "http://admin:admin@hsds.nsrdb.test", 
+        "http://admin:admin@hsds.nsrdb.testtwo", 
+        "http://admin:admin@hsds.nsrdb.testthree", 
+        "http://admin:admin@hsds.nsrdb.testfour"
       ],
       HSDS_DOMAIN = '/nrel/nsrdb_test';
 
