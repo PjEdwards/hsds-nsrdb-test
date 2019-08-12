@@ -1,5 +1,6 @@
 const express = require('express'),
       indexRoute = require('./app/index.route'),
+      wideRoute = require('./app/wide.route'),
       utils = require('./app/utils');
 
 // Preload the meta
@@ -12,6 +13,10 @@ app.use(express.json());
 
 app.use('/', function(req, res, next) {
   indexRoute(req, res, next);
+});
+
+app.use('/wide', function (req, res, next) {
+  wideRoute(req, res, next);
 });
 
 app.get('/ping', (req, res) => res.send('pong'))
