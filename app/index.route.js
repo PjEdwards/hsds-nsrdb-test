@@ -74,23 +74,32 @@ async function(req, res, next){
       selectParm = (interval === 30) ? `[0::1,${siteId}:${siteId+1}:1]` : `[1::2,${siteId}:${siteId+1}:1]`;
 
   try {
+    console.log(`selectParam: ${selectParm}`);
     datasetMeta = await utils.getNSRDBMetaData();
     datasetMeta = datasetMeta[year];
 
     if(!datasets.includes('time_index')) {
       datasets.splice(0, 0, 'time_index');
     }
+     
 
-    console.log(`Starting new job at ${startTime} with ${selectParm}, ${year}, ${datasets}`);
+
+    console.log(`Starting new index job at ${startTime} with ${selectParm}, ${year}, ${datasets}`);
 
     // Collect the datasets as parallel requests
     requests = {}
     datasets.forEach(ds => {
+      if(ds=='time_index') {
+        select_param = '[::]';
+      } else {
+        select_param = selectParm;
+      }
+      console.log(`creating request for ds: ${ds} select: ${selectParm}`)
       let dsId = datasetMeta.datasets.find(dsm => dsm.name === ds)['id'],
           requestUri = `${getHsdsUri()}/datasets/${dsId}/value`,
           params = {
-            domain: `${hsdsDomain}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
-            select: selectParm,
+            domain: `${hsdsDomain}${year}${constants.FILE_NAME_APPEND}`,
+            select: select_param,
             bucket: `${bucket}`
           },
           options = {

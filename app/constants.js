@@ -1,10 +1,10 @@
 // All the years for which there exists data in HSDS
 // const YEARS = Array.from({length: 20}, (x,i) => i+1998 );
 const YEARS = [
-  2016, 2017
+  2018, 2019, 2020
 ]
 
-const FILE_NAME_APPEND = '-1w';
+const FILE_NAME_APPEND = '.h5';
 
 // All the downloadable datasets in HSDS
 const DATASETS = [
@@ -28,12 +28,9 @@ const DATASETS = [
 ]
   
 const HSDS_URIS = [
-        "http://admin:admin@hsds.nsrdb.test", 
-        "http://admin:admin@hsds.nsrdb.testtwo", 
-        "http://admin:admin@hsds.nsrdb.testthree", 
-        "http://admin:admin@hsds.nsrdb.testfour"
+        "http://test_user1:test@35.89.200.47:5101", 
       ],
-      HSDS_DOMAIN = '/nrel/nsrdb_test';
+      HSDS_DOMAIN = '/nrel/nsrdb/conus/nsrdb_conus_';
 
 const BUCKET_NAME = 'nrel-pds-hsds';
 
