@@ -12,7 +12,7 @@ const _initNSRDBMetaForAttr = function(year, dataset, attr, axiosInstance) {
     // Fifth get the value of each available attribute
     let axiosOpts = {
       params: {
-        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
+        domain: `${constants.HSDS_DOMAIN}${year}${constants.FILE_NAME_APPEND}`,
         bucket: `${constants.BUCKET_NAME}`
       },
       url: `/datasets/${dataset.id}/attributes/${attr.name}`
@@ -37,7 +37,7 @@ const _initNSRDBMetaForDataset = function (year, dataset, axiosInstance) {
   const req = function (callback) {
     let axiosOpts = {
       params: {
-        domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
+        domain: `${constants.HSDS_DOMAIN}${year}${constants.FILE_NAME_APPEND}`,
         bucket: `${constants.BUCKET_NAME}`
       },
       url: `/datasets/${dataset.id}/attributes`
@@ -65,7 +65,7 @@ const _initNSRDBMetaForYear = function(year, axiosInstance) {
     let meta = {},
         axiosOpts = {
           params: {
-            domain: `${constants.HSDS_DOMAIN}/nsrdb_${year}${constants.FILE_NAME_APPEND}.h5`,
+            domain: `${constants.HSDS_DOMAIN}${year}${constants.FILE_NAME_APPEND}`,
             bucket: `${constants.BUCKET_NAME}`
           }
         };
