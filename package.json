@@ -10,7 +10,7 @@
     "express": "^4.16.3",
     "express-validator": "^5.3.0",
     "loadtest": "^3.0.7",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "nodemon": "^1.18.4",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
